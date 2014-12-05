@@ -50,10 +50,11 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
     </no-captcha>
     ```
 
-# no-captcha element parameters
+## no-captcha element parameters
 
-| Param                | Type                   | Details                                                             |
-|----------------------|------------------------|---------------------------------------------------------------------|
-| g-recaptcha-response | Expression             | Bind reCAPTCHA response token                                       |
-| theme                | String {light | dark}  | Optional. The color theme of the widget. Can be set also in config  |
-| site-key             | String                 | Optional. Your site key. Can be set also in config                  |
+| Param                | Type                   | Details                                                            |
+|----------------------|------------------------|--------------------------------------------------------------------|
+| g-recaptcha-response | Expression             | Bind reCAPTCHA response token                                      |
+| theme                | String {light \| dark} | Optional. The color theme of the widget. Can be set also in config |
+| site-key             | String                 | Optional. Your site key. Can be set also in config                 |
+
