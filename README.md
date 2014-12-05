@@ -18,7 +18,7 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
 
 1. Add Googles reCAPTCHA script to html
     ```html
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='//www.google.com/recaptcha/api.js'></script>
     ```
 
 1. Include noCAPTCHA script
