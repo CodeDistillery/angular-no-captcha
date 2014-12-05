@@ -22,7 +22,7 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
     ```
 
 1. Include noCAPTCHA script
-    ```javascript
+    ```html
     <script src="angular-no-captcha.js"></script>
     ```
 
