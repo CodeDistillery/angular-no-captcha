@@ -3,7 +3,7 @@ angular-no-captcha
 
 Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
 
-# Before
+# Prerequisites
 
 1. Sign up for an API key at [https://www.google.com/recaptcha/admin#createsite](https://www.google.com/recaptcha/admin#createsite).
 
