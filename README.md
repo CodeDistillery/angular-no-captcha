@@ -45,5 +45,5 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
 | Param                   | Type                    | Details                                   |
 |-------------------------|-------------------------|-----------------------------------------  |
 | g-recaptcha-response    | Expression              | Bind reCAPTCHA response token             |
-| theme                   | String {light | dark}   | Optional. The color theme of the widget.  |
+| theme                   | String {light \| dark}  | Optional. The color theme of the widget.  |
 | site-key                | String                  | Public site key                           |
