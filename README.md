@@ -40,7 +40,7 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
     </no-captcha>
     ```
 
-# no-captcha element parameters
+## no-captcha element parameters
 
 | Param                   | Type                    | Details                                   |
 |-------------------------|-------------------------|-----------------------------------------  |
