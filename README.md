@@ -31,6 +31,16 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
     var app = angular.module('myApp', ['noCAPTCHA']);
     ```
 
+1. Set default options for noCAPTCHA Optional step
+    ```javascript
+    angular.module('myApp')
+      .config(['noCaptchaProvider', function (noCaptchaProvider) {
+        noCaptchaProvider.setSiteKey('<your site key>');
+        noCaptchaProvider.setTheme('dark');
+      }
+    ]);
+    ```
+    
 1. Finally add noCaptcha element to your form
     ```html
     <no-captcha
@@ -42,8 +52,8 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
 
 # no-captcha element parameters
 
-| Param                   | Type                    | Details                                   |
-|-------------------------|-------------------------|-----------------------------------------  |
-| g-recaptcha-response    | Expression              | Bind reCAPTCHA response token             |
-| theme                   | String {light | dark}   | Optional. The color theme of the widget.  |
-| site-key                | String                  | Public site key                           |
+| Param                | Type                   | Details                                                             |
+|----------------------|------------------------|---------------------------------------------------------------------|
+| g-recaptcha-response | Expression             | Bind reCAPTCHA response token                                       |
+| theme                | String {light | dark}  | Optional. The color theme of the widget. Can be set also in config  |
+| site-key             | String                 | Optional. Your site key. Can be set also in config                  |

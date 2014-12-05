@@ -1,8 +1,26 @@
 'use strict';
 
-angular
-  .module('noCAPTCHA', [])
-  .directive('noCaptcha', function(){
+angular.module('noCAPTCHA', [])
+  .provider('noCaptcha', function NoCaptchaProvider() {
+    var siteKey,
+        theme;
+
+    this.setSiteKey = function(_siteKey){
+      siteKey = _siteKey;
+    };
+
+    this.setTheme = function(_theme){
+      theme = _theme;
+    };
+
+    this.$get = [function NoCaptchaFactory() {
+      return {
+        theme: theme,
+        siteKey: siteKey
+      }
+    }];
+  })
+  .directive('noCaptcha', ['noCaptchaProvider', function(noCaptchaProvider){
     return {
       restrict:'EA',
       scope: {
@@ -13,10 +31,11 @@ angular
       replace: true,
       link: function(scope, element){
         var widgetId,
-            parameters;
+            grecaptchaCreateParameters;
 
-        parameters = {
-          sitekey: scope.siteKey,
+        grecaptchaCreateParameters = {
+          sitekey: scope.siteKey || noCaptchaProvider.siteKey,
+          theme: scope.theme || noCaptchaProvider.theme,
           callback: function(r){
             scope.$apply(function(){
               scope.gRecaptchaResponse = r;
@@ -24,13 +43,9 @@ angular
           }
         };
 
-        if(scope.theme){
-          parameters.theme = scope.theme;
-        }
-
         grecaptcha.render(
           element[0],
-          parameters
+          grecaptchaCreateParameters
         );
 
         scope.$on('$destroy', function(){
@@ -38,4 +53,4 @@ angular
         });
       }
     };
-  });
+  }]);
