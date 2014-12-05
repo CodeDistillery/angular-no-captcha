@@ -42,7 +42,9 @@ angular.module('noCAPTCHA', [])
             });
           }
         };
-
+        if(!grecaptchaCreateParameters.siteKey){
+          return throw 'Site Key is required';
+        }
         grecaptcha.render(
           element[0],
           grecaptchaCreateParameters
