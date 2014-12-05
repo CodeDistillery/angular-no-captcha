@@ -33,6 +33,10 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
 
 1. Finally add noCaptcha element to your form
     ```html
-    <div no-captcha g-recaptcha-response="gRecaptchaResponse" theme='light' site-key="<your site key>"></div>
+    <no-captcha
+        g-recaptcha-response="gRecaptchaResponse"
+        theme='light'
+        site-key="<your site key>">
+    </no-captcha>
     ```
 
