@@ -12,7 +12,9 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
 ## Usage
 
 1. Install package via bower
-    ```$ bower install angular-no-captcha```
+    ```
+    $ bower install angular-no-captcha
+    ```
 
 1. Add Googles reCAPTCHA script to html
     ```html
