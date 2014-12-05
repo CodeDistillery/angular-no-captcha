@@ -31,7 +31,7 @@ Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA
     var app = angular.module('myApp', ['noCAPTCHA']);
     ```
 
-1. Set default options for noCAPTCHA Optional step
+1. (Optional step) Set default options for noCAPTCHA 
     ```javascript
     angular.module('myApp')
       .config(['noCaptchaProvider', function (noCaptchaProvider) {
