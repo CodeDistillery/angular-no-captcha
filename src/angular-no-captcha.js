@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noCAPTCHA', [])
-  .provider('noCaptcha', function NoCaptchaProvider() {
+  .provider('noCAPTCHA', function NoCaptchaProvider() {
     var siteKey,
         theme;
 
@@ -20,7 +20,7 @@ angular.module('noCAPTCHA', [])
       }
     }];
   })
-  .directive('noCaptcha', ['noCaptchaProvider', function(noCaptchaProvider){
+  .directive('noCaptcha', ['noCAPTCHA', function(noCaptcha){
     return {
       restrict:'EA',
       scope: {
@@ -34,8 +34,8 @@ angular.module('noCAPTCHA', [])
             grecaptchaCreateParameters;
 
         grecaptchaCreateParameters = {
-          sitekey: scope.siteKey || noCaptchaProvider.siteKey,
-          theme: scope.theme || noCaptchaProvider.theme,
+          sitekey: scope.siteKey || noCaptcha.siteKey,
+          theme: scope.theme || noCaptcha.theme,
           callback: function(r){
             scope.$apply(function(){
               scope.gRecaptchaResponse = r;
