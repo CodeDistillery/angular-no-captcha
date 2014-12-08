@@ -1,0 +1,33 @@
+{
+  "name": "angular-no-captcha",
+  "version": "0.1.2",
+  "homepage": "https://github.com/CodeDistillery/angular-no-captcha",
+  "authors": [
+    "Veikko Karsikko <veikko@nordicventurefamily.com>"
+  ],
+  "description": "Angular.JS wrapper from Google's No CAPTCHA reCAPTCHA",
+  "main": "src/angular-no-captcha.js",
+  "keywords": [
+    "angularjs",
+    "angular.js",
+    "nocaptcha",
+    "recaptcha"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.2",
+    "commit": "6b586539ce5abb7a2315720c671971a6cc1d218d"
+  },
+  "_source": "git://github.com/CodeDistillery/angular-no-captcha.git",
+  "_target": "~0.1.2",
+  "_originalSource": "angular-no-captcha"
+}
