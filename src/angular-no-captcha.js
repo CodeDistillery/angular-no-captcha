@@ -42,8 +42,8 @@ angular.module('noCAPTCHA', [])
             });
           }
         };
-        if(!grecaptchaCreateParameters.siteKey){
-          return throw 'Site Key is required';
+        if(!grecaptchaCreateParameters.sitekey){
+          return throw new Error( 'Site Key is required');
         }
         grecaptcha.render(
           element[0],
