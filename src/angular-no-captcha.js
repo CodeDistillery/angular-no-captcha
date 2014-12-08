@@ -43,7 +43,7 @@ angular.module('noCAPTCHA', [])
           }
         };
         if(!grecaptchaCreateParameters.sitekey){
-          return throw new Error( 'Site Key is required');
+          throw new Error('Site Key is required');
         }
         grecaptcha.render(
           element[0],
