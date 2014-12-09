@@ -1,7 +1,7 @@
 angular-no-captcha
 ==================
 
-Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA
+Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedistillery.github.io/angular-no-captcha/](http://codedistillery.github.io/angular-no-captcha/)
 
 ## Prerequisites
 
