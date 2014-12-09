@@ -1,0 +1,24 @@
+{
+  "name": "angular-no-captcha-demo",
+  "directory" : "public",
+  "version": "0.0.1",
+  "homepage": "https://codedistillery.github.io/angular-no-captcha",
+  "authors": [
+    "Veikko Karsikko <veikko.karsikko@gmail.com>"
+  ],
+  "description": "Angular no captcha demo",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-no-captcha": "~0.1.2",
+    "angular": "~1.3.5"
+  }
+}
