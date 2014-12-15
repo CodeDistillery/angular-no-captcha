@@ -3,7 +3,7 @@
 angular.module('noCAPTCHA', [])
   .provider('noCAPTCHA', function NoCaptchaProvider() {
     var siteKey,
-        theme;
+      theme;
 
     this.setSiteKey = function(_siteKey){
       siteKey = _siteKey;
@@ -32,8 +32,8 @@ angular.module('noCAPTCHA', [])
       replace: true,
       link: function(scope, element) {
         var widgetId,
-            grecaptchaCreateParameters,
-            control = scope.control || {};
+          grecaptchaCreateParameters,
+          control = scope.control || {};
 
         grecaptchaCreateParameters = {
           sitekey: scope.siteKey || noCaptcha.siteKey,
