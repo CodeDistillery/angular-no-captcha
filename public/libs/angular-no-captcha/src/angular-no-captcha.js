@@ -56,6 +56,7 @@ angular.module('noCAPTCHA', [])
 
         control.reset = function(){
           grecaptcha.reset(widgetId);
+          scope.gRecaptchaResponse = null;
         };
 
         scope.$on('$destroy', function(){
