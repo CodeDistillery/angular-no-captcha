@@ -26,12 +26,14 @@ angular.module('noCAPTCHA', [])
       scope: {
         gRecaptchaResponse:'=',
         siteKey:'@',
-        theme:'@'
+        theme:'@',
+        control:'='
       },
       replace: true,
-      link: function(scope, element){
+      link: function(scope, element) {
         var widgetId,
-            grecaptchaCreateParameters;
+            grecaptchaCreateParameters,
+            control = scope.control || {};
 
         grecaptchaCreateParameters = {
           sitekey: scope.siteKey || noCaptcha.siteKey,
@@ -42,13 +44,19 @@ angular.module('noCAPTCHA', [])
             });
           }
         };
+
         if(!grecaptchaCreateParameters.sitekey){
           throw new Error('Site Key is required');
         }
-        grecaptcha.render(
+
+        widgetId = grecaptcha.render(
           element[0],
           grecaptchaCreateParameters
         );
+
+        control.reset = function(){
+          grecaptcha.reset(widgetId);
+        };
 
         scope.$on('$destroy', function(){
           grecaptcha.reset(widgetId);
