@@ -1,6 +1,19 @@
 'use strict';
 
 angular.module('noCAPTCHA', [])
+  .service('googleGrecaptcha', ['$q', '$window', function GoogleGrecaptchaService($q, $window) {
+    var deferred = $q.defer();
+
+    $window.recaptchaOnloadCallback = function () {
+      deferred.resolve();
+    };
+
+    var s = document.createElement('script');
+    s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
+    document.body.appendChild(s);
+
+    return deferred.promise;
+  }])
   .provider('noCAPTCHA', function NoCaptchaProvider() {
     var siteKey,
       theme;
@@ -20,7 +33,7 @@ angular.module('noCAPTCHA', [])
       }
     }];
   })
-  .directive('noCaptcha', ['noCAPTCHA', function(noCaptcha){
+  .directive('noCaptcha', ['noCAPTCHA','googleGrecaptcha', function(noCaptcha, googleGrecaptcha){
     return {
       restrict:'EA',
       scope: {
@@ -49,15 +62,16 @@ angular.module('noCAPTCHA', [])
           throw new Error('Site Key is required');
         }
 
-        widgetId = grecaptcha.render(
-          element[0],
-          grecaptchaCreateParameters
-        );
-
-        control.reset = function(){
-          grecaptcha.reset(widgetId);
-          scope.gRecaptchaResponse = null;
-        };
+        googleGrecaptcha.then(function(){
+          widgetId = grecaptcha.render(
+            element[0],
+            grecaptchaCreateParameters
+          );
+          control.reset = function(){
+            grecaptcha.reset(widgetId);
+            scope.gRecaptchaResponse = null;
+          };
+        });
 
         scope.$on('$destroy', function(){
           grecaptcha.reset(widgetId);
