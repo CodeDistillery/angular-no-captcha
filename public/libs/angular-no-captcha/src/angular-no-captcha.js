@@ -9,7 +9,7 @@ angular.module('noCAPTCHA', [])
     };
 
     var s = document.createElement('script');
-    s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
+    s.src = '//www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
     document.body.appendChild(s);
 
     return deferred.promise;
