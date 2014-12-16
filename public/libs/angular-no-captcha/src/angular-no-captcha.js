@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noCAPTCHA', [])
-  .service('googleGrecaptcha', function GoogleGrecaptchaService() {
+  .service('googleGrecaptcha', ['$q',function GoogleGrecaptchaService($q) {
     var deferred = $q.defer();
 
     $window.recaptchaOnloadCallback = function () {
@@ -13,7 +13,7 @@ angular.module('noCAPTCHA', [])
     document.body.appendChild(s);
 
     return deferred.promise;
-  })
+  }])
   .provider('noCAPTCHA', function NoCaptchaProvider() {
     var siteKey,
       theme;
