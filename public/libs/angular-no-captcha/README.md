@@ -14,12 +14,7 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 1. Install package via bower and save it as a project dependency
     ```
     $ bower install angular-no-captcha --save
-    ```
-
-1. Add Googles reCAPTCHA script to html
-    ```html
-    <script src='//www.google.com/recaptcha/api.js'></script>
-    ```
+    ````
 
 1. Include noCAPTCHA script
     ```html
@@ -46,6 +41,7 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
     <no-captcha
         g-recaptcha-response="gRecaptchaResponse"
         theme='light'
+        control="noCaptchaControl"
         site-key="<your site key>">
     </no-captcha>
     ```
@@ -57,4 +53,5 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 | g-recaptcha-response | Expression             | Bind reCAPTCHA response token                                      |
 | theme                | String {light \| dark} | Optional. The color theme of the widget. Can be set also in config |
 | site-key             | String                 | Optional. Your site key. Can be set also in config                 |
+| control              | Expression             | Optional. Object where reset-function will be injected             |
 
