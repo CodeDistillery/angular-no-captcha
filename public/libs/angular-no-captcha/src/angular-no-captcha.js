@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noCAPTCHA', [])
-  .service('googleGrecaptcha', ['$q',function GoogleGrecaptchaService($q) {
+  .service('googleGrecaptcha', ['$q', '$window', function GoogleGrecaptchaService($q, $window) {
     var deferred = $q.defer();
 
     $window.recaptchaOnloadCallback = function () {
