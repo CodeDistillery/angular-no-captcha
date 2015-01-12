@@ -26,8 +26,7 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
     var app = angular.module('myApp', ['noCAPTCHA']);
     ```
 
-1. (IMPORTANT) Set the callback request method/endpoint
-	You must set the request method,endpoint,headers to your backend page for user's response verification.
+1. (IMPORTANT) Set the request method,endpoint,headers to your backend page for user's response verification.
 	(See [https://developers.google.com/recaptcha/docs/verify](there) for details).
 	The result of verification (true or false) will be bind into g-recaptcha-success expression.
     ```javascript
