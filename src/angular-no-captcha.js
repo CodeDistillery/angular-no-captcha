@@ -1,81 +1,94 @@
 'use strict';
 
 angular.module('noCAPTCHA', [])
-  .service('googleGrecaptcha', ['$q', '$window', function GoogleGrecaptchaService($q, $window) {
-    var deferred = $q.defer();
+	.service('googleGrecaptcha', ['$q', '$window', function GoogleGrecaptchaService($q, $window) {
+		var deferred = $q.defer();
 
-    $window.recaptchaOnloadCallback = function () {
-      deferred.resolve();
-    };
+		$window.recaptchaOnloadCallback = function() {
+			deferred.resolve();
+		};
 
-    var s = document.createElement('script');
-    s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
-    document.body.appendChild(s);
+		var s = document.createElement('script');
+		s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
+		document.body.appendChild(s);
 
-    return deferred.promise;
-  }])
-  .provider('noCAPTCHA', function NoCaptchaProvider() {
-    var siteKey,
-      theme;
+		return deferred.promise;
+	}])
+	.provider('noCAPTCHA', function NoCaptchaProvider() {
+		var siteKey,
+			theme,
+			req;
 
-    this.setSiteKey = function(_siteKey){
-      siteKey = _siteKey;
-    };
+		this.setSiteKey = function(_siteKey) {
+			siteKey = _siteKey;
+		};
 
-    this.setTheme = function(_theme){
-      theme = _theme;
-    };
+		this.setTheme = function(_theme) {
+			theme = _theme;
+		};
 
-    this.$get = [function NoCaptchaFactory() {
-      return {
-        theme: theme,
-        siteKey: siteKey
-      }
-    }];
-  })
-  .directive('noCaptcha', ['noCAPTCHA','googleGrecaptcha', function(noCaptcha, googleGrecaptcha){
-    return {
-      restrict:'EA',
-      scope: {
-        gRecaptchaResponse:'=',
-        siteKey:'@',
-        theme:'@',
-        control:'='
-      },
-      replace: true,
-      link: function(scope, element) {
-        var widgetId,
-          grecaptchaCreateParameters,
-          control = scope.control || {};
+		this.setReq = function(_req) {
+			req = _req;
+		};
 
-        grecaptchaCreateParameters = {
-          sitekey: scope.siteKey || noCaptcha.siteKey,
-          theme: scope.theme || noCaptcha.theme,
-          callback: function(r){
-            scope.$apply(function(){
-              scope.gRecaptchaResponse = r;
-            });
-          }
-        };
+		this.$get = [function NoCaptchaFactory() {
+			return {
+				theme: theme,
+				siteKey: siteKey,
+				req: req
+			}
+		}];
+	})
+	.directive('noCaptcha', ['noCAPTCHA', 'googleGrecaptcha', '$http', function(noCaptcha, googleGrecaptcha, $http) {
+		return {
+			restrict: 'EA',
+			scope: {
+				gRecaptchaSuccess: '=',
+				siteKey: '@',
+				theme: '@',
+				control: '='
+			},
+			replace: true,
+			link: function(scope, element) {
+				var widgetId,
+					grecaptchaCreateParameters,
+					control = scope.control || {};
 
-        if(!grecaptchaCreateParameters.sitekey){
-          throw new Error('Site Key is required');
-        }
+				grecaptchaCreateParameters = {
+					sitekey: scope.siteKey || noCaptcha.siteKey,
+					theme: scope.theme || noCaptcha.theme,
+					callback: function(response) {
+						noCaptcha.req.data = {responseString: response};
+						
+						$http(noCaptcha.req).
+						success(function(data, status, headers, config) {
+							scope.gRecaptchaSuccess = data.success;
+						}).
+						error(function(data, status, headers, config) {
+							scope.gRecaptchaSuccess = false;
+							console.log(data);
+						})
+					}
+				};
 
-        googleGrecaptcha.then(function(){
-          widgetId = grecaptcha.render(
-            element[0],
-            grecaptchaCreateParameters
-          );
-          control.reset = function(){
-            grecaptcha.reset(widgetId);
-            scope.gRecaptchaResponse = null;
-          };
-        });
+				if (!grecaptchaCreateParameters.sitekey) {
+					throw new Error('Site Key is required');
+				}
 
-        scope.$on('$destroy', function(){
-          grecaptcha.reset(widgetId);
-        });
-      }
-    };
-  }]);
+				googleGrecaptcha.then(function() {
+					widgetId = grecaptcha.render(
+						element[0],
+						grecaptchaCreateParameters
+					);
+					control.reset = function() {
+						grecaptcha.reset(widgetId);
+						scope.gRecaptchaSuccess = false;
+					};
+				});
+
+				scope.$on('$destroy', function() {
+					grecaptcha.reset(widgetId);
+				});
+			}
+		};
+	}]);
