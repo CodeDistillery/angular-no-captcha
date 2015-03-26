@@ -58,9 +58,11 @@ angular.module('noCAPTCHA', [])
             });
           },
           'expired-callback': function () {
-            scope.$apply(function () {
-              scope.expiredCallback();
-            });
+            if (scope.expiredCallback != undefined && typeof (scope.expiredCallback) == 'function') {
+              scope.$apply(function () {
+                scope.expiredCallback();
+              });
+            }
           }
         };
 
