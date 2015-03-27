@@ -58,7 +58,7 @@ angular.module('noCAPTCHA', [])
             });
           },
           'expired-callback': function () {
-            if (scope.expiredCallback != undefined && typeof (scope.expiredCallback) == 'function') {
+            if (scope.expiredCallback && typeof (scope.expiredCallback) === 'function') {
               scope.$apply(function () {
                 scope.expiredCallback();
               });
