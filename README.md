@@ -56,3 +56,7 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 | control              | Expression             | Optional. Object where reset-function will be injected             |
 | expired-callback     | Expression             | Optional. Callback for expired event                               |
 
+## Example
+
+1. Add your ```API key``` to ```example/index.html```
+1. Run Server ```$ node example/server.js```
