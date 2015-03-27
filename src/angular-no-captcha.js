@@ -40,7 +40,8 @@ angular.module('noCAPTCHA', [])
         gRecaptchaResponse:'=',
         siteKey:'@',
         theme:'@',
-        control:'='
+        control:'=',
+        expiredCallback: '='
       },
       replace: true,
       link: function(scope, element) {
@@ -55,6 +56,13 @@ angular.module('noCAPTCHA', [])
             scope.$apply(function(){
               scope.gRecaptchaResponse = r;
             });
+          },
+          'expired-callback': function () {
+            if (scope.expiredCallback != undefined && typeof (scope.expiredCallback) == 'function') {
+              scope.$apply(function () {
+                scope.expiredCallback();
+              });
+            }
           }
         };
 
