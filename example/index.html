@@ -30,11 +30,7 @@
   </script>
 
   <style>
-    .response {
-      width: 200px;
-    }
-
-    .response.expired {
+    .expired {
       color: red;
     }
   </style>
@@ -45,7 +41,7 @@
     g-recaptcha-response="gRecaptchaResponse"
     theme='light'></no-captcha>
 
-  <code class="response" ng-class="{ 'expired': expired }">
+  <code ng-class="{ 'expired': expired }">
     {{ gRecaptchaResponse }}
   </code>
 </body>
