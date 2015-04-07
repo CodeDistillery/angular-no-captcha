@@ -41,7 +41,8 @@ angular.module('noCAPTCHA', [])
         siteKey:'@',
         theme:'@',
         control:'=',
-        expiredCallback: '='
+        expiredCallback: '=',
+        reset: '='
       },
       replace: true,
       link: function(scope, element) {
@@ -64,6 +65,10 @@ angular.module('noCAPTCHA', [])
               });
             }
           }
+        };
+
+        scope.reset = function () {
+          grecaptcha.reset(widgetId);
         };
 
         if(!grecaptchaCreateParameters.sitekey){
