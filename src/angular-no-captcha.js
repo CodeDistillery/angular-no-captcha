@@ -8,9 +8,9 @@ angular.module('noCAPTCHA', [])
       deferred.resolve();
     };
 
-    var s = $document.createElement('script');
+    var s = $document[0].createElement('script');
     s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
-    $document.body.appendChild(s);
+    $document[0].body.appendChild(s);
 
     return deferred.promise;
   }])
