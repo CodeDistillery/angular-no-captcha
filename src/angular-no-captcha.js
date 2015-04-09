@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('noCAPTCHA', [])
-  .service('googleGrecaptcha', ['$q', '$window', function GoogleGrecaptchaService($q, $window) {
+  .service('googleGrecaptcha', ['$q', '$window', '$document', function GoogleGrecaptchaService($q, $window, $document) {
     var deferred = $q.defer();
 
     $window.recaptchaOnloadCallback = function () {
       deferred.resolve();
     };
 
-    var s = document.createElement('script');
+    var s = $document[0].createElement('script');
     s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
-    document.body.appendChild(s);
+    $document[0].body.appendChild(s);
 
     return deferred.promise;
   }])
