@@ -45,9 +45,11 @@ angular.module('noCAPTCHA', [])
       },
       replace: true,
       link: function(scope, element) {
+        scope.control = scope.control || {};
+        
         var widgetId,
           grecaptchaCreateParameters,
-          control = scope.control || {};
+          control = scope.control;
 
         grecaptchaCreateParameters = {
           sitekey: scope.siteKey || noCaptcha.siteKey,
