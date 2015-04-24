@@ -1,0 +1,48 @@
+<html ng-app="myApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="/src/angular-no-captcha.js"></script>
+  <script>
+    var SITE_KEY = '<your site key>';
+
+    var app = angular
+      .module('myApp', ['noCAPTCHA'])
+      .config(['noCAPTCHAProvider',
+        function (noCaptchaProvider){
+          noCaptchaProvider.setSiteKey(SITE_KEY);
+          noCaptchaProvider.setTheme('dark');
+        }
+      ])
+      .controller('exampleController', [
+        '$scope',
+        function exampleController($scope){
+          $scope.gRecaptchaResponse = '';
+
+          $scope.$watch('gRecaptchaResponse', function (){
+            $scope.expired = false;
+          });
+
+          $scope.expiredCallback = function expiredCallback(){
+            $scope.expired = true;
+          };
+        }]);
+
+  </script>
+
+  <style>
+    .expired {
+      color: red;
+    }
+  </style>
+</head>
+<body ng-controller="exampleController">
+  <no-captcha
+    expired-callback="expiredCallback"
+    g-recaptcha-response="gRecaptchaResponse"
+    theme='light'></no-captcha>
+
+  <code ng-class="{ 'expired': expired }">
+    {{ gRecaptchaResponse }}
+  </code>
+</body>
+</html>

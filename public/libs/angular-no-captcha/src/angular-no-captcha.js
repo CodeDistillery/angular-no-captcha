@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('noCAPTCHA', [])
-  .service('googleGrecaptcha', ['$q', '$window', function GoogleGrecaptchaService($q, $window) {
+  .service('googleGrecaptcha', ['$q', '$window', '$document', function GoogleGrecaptchaService($q, $window, $document) {
     var deferred = $q.defer();
 
     $window.recaptchaOnloadCallback = function () {
       deferred.resolve();
     };
 
-    var s = document.createElement('script');
-    s.src = '//www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
-    document.body.appendChild(s);
+    var s = $document[0].createElement('script');
+    s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
+    $document[0].body.appendChild(s);
 
     return deferred.promise;
   }])
@@ -40,13 +40,16 @@ angular.module('noCAPTCHA', [])
         gRecaptchaResponse:'=',
         siteKey:'@',
         theme:'@',
-        control:'='
+        control:'=',
+        expiredCallback: '='
       },
       replace: true,
       link: function(scope, element) {
+        scope.control = scope.control || {};
+        
         var widgetId,
           grecaptchaCreateParameters,
-          control = scope.control || {};
+          control = scope.control;
 
         grecaptchaCreateParameters = {
           sitekey: scope.siteKey || noCaptcha.siteKey,
@@ -55,6 +58,13 @@ angular.module('noCAPTCHA', [])
             scope.$apply(function(){
               scope.gRecaptchaResponse = r;
             });
+          },
+          'expired-callback': function () {
+            if (scope.expiredCallback && typeof (scope.expiredCallback) === 'function') {
+              scope.$apply(function () {
+                scope.expiredCallback();
+              });
+            }
           }
         };
 

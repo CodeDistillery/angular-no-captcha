@@ -54,4 +54,9 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 | theme                | String {light \| dark} | Optional. The color theme of the widget. Can be set also in config |
 | site-key             | String                 | Optional. Your site key. Can be set also in config                 |
 | control              | Expression             | Optional. Object where reset-function will be injected             |
+| expired-callback     | Expression             | Optional. Callback for expired event                               |
 
+## Example
+
+1. Add your ```API key``` to ```example/index.html```
+1. Run Server ```$ node example/server.js```
