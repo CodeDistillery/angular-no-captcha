@@ -51,12 +51,13 @@ angular
           gRecaptchaResponse: '=',
           siteKey: '@',
           theme: '@',
-          control: '=',
-          expiredCallback: '='
+          control: '=?',
+          expiredCallback: '=?'
         },
         replace: true,
         link: function (scope, element){
           scope.control = scope.control || {};
+
           var widgetId;
           var grecaptchaCreateParameters;
           var control = scope.control;
