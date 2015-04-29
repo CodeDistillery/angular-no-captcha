@@ -1,0 +1,32 @@
+{
+  "name": "angular-no-captcha",
+  "version": "0.4.2",
+  "description": "angular-no-captcha ==================",
+  "main": "src/angular-not-captcha.js",
+  "directories": {
+    "example": "example",
+    "test": "tests"
+  },
+  "devDependencies": {
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.8",
+    "karma-jasmine": "^0.3.5",
+    "karma-mocha": "^0.1.10",
+    "karma-sinon-chai": "^0.3.0",
+    "mocha": "^2.2.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeDistillery/angular-no-captcha.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeDistillery/angular-no-captcha/issues"
+  },
+  "homepage": "https://github.com/CodeDistillery/angular-no-captcha"
+}
