@@ -1,6 +1,6 @@
 {
   "name": "angular-no-captcha",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "homepage": "https://github.com/CodeDistillery/angular-no-captcha",
   "authors": [
     "Veikko Karsikko <veikko@nordicventurefamily.com>"
@@ -21,14 +21,13 @@
     "test",
     "tests"
   ],
-  "_release": "0.4.1",
+  "_release": "0.4.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.4.1",
-    "commit": "7b219161581f97346bb905b4b7cc051c59ca2254"
+    "tag": "0.4.2",
+    "commit": "ad9009a061711de2cf54cded9c4426c50861c708"
   },
   "_source": "git://github.com/CodeDistillery/angular-no-captcha.git",
   "_target": "~0.4.1",
-  "_originalSource": "angular-no-captcha",
-  "_direct": true
+  "_originalSource": "angular-no-captcha"
 }
