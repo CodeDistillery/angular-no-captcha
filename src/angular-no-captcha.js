@@ -44,7 +44,8 @@ angular
   .directive('noCaptcha', [
     'noCAPTCHA',
     'googleGrecaptcha',
-    function (noCaptcha, googleGrecaptcha){
+    '$document',
+    function (noCaptcha, googleGrecaptcha, $document){
       /**
        * Removes all .pls-container elements
        *
