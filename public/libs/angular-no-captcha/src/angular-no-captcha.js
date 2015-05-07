@@ -45,6 +45,28 @@ angular
     'noCAPTCHA',
     'googleGrecaptcha',
     function (noCaptcha, googleGrecaptcha){
+      /**
+       * Removes all .pls-container elements
+       *
+       * This is a dirty workaround for fixing reCAPTCHAs bug
+       * which leaves obsolete elements that causes errors
+       * when closing dialogues or changing pages
+       *
+       * This will be removed as soon as Google fixes the bug
+       *
+       * Discussion: https://groups.google.com/forum/#!topic/recaptcha/miaW9qdVIgA
+       */
+      var removePLSContainers = function(){
+        // remove pls-containers
+        var plsContainers = $document[0].getElementsByClassName('pls-container');
+        for(var i = 0; i < plsContainers.length; i++){
+          var parent = plsContainers[i].parentNode;
+          while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+          }
+        }
+      };
+
       return {
         restrict: 'EA',
         scope: {
@@ -96,6 +118,7 @@ angular
 
           scope.$on('$destroy', function (){
             grecaptcha.reset(widgetId);
+            removePLSContainers();
           });
         }
       };
