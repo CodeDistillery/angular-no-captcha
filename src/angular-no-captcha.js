@@ -118,7 +118,9 @@ angular
           });
 
           scope.$on('$destroy', function (){
-            grecaptcha.reset(widgetId);
+            if(grecaptcha) {
+              grecaptcha.reset(widgetId);
+            }
             removePLSContainers();
           });
         }
