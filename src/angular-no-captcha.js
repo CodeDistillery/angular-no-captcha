@@ -45,7 +45,8 @@ angular
     'noCAPTCHA',
     'googleGrecaptcha',
     '$document',
-    function (noCaptcha, googleGrecaptcha, $document){
+    '$window',
+    function (noCaptcha, googleGrecaptcha, $document, $window){
       /**
        * Removes all .pls-container elements
        *
@@ -107,18 +108,20 @@ angular
           }
 
           googleGrecaptcha.then(function (){
-            widgetId = grecaptcha.render(
+            widgetId = $window.grecaptcha.render(
               element[0],
               grecaptchaCreateParameters
             );
             control.reset = function (){
-              grecaptcha.reset(widgetId);
+              $window.grecaptcha.reset(widgetId);
               scope.gRecaptchaResponse = null;
             };
           });
 
           scope.$on('$destroy', function (){
-            grecaptcha.reset(widgetId);
+            if($window.grecaptcha) {
+              $window.grecaptcha.reset(widgetId);
+            }
             removePLSContainers();
           });
         }
