@@ -1,6 +1,8 @@
 angular-no-captcha
 ==================
 
+[![Join the chat at https://gitter.im/CodeDistillery/angular-no-captcha](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CodeDistillery/angular-no-captcha?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedistillery.github.io/angular-no-captcha/](http://codedistillery.github.io/angular-no-captcha/)
 
 ## Prerequisites
