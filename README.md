@@ -74,4 +74,6 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 
 Release task builds the project and releases a new version to GitHub
 
+You must set the environment variable ```GITHUB_ACCESS_TOKEN=<your-token>```
+
 ```$ grunt release[:patch | :minor | :major]```
