@@ -1,6 +1,8 @@
 angular-no-captcha
 ==================
 
+[![Join the chat at https://gitter.im/CodeDistillery/angular-no-captcha](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CodeDistillery/angular-no-captcha?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedistillery.github.io/angular-no-captcha/](http://codedistillery.github.io/angular-no-captcha/)
 
 ## Prerequisites
@@ -35,7 +37,7 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
       }
     ]);
     ```
-    
+
 1. Finally add noCaptcha element to your form
     ```html
     <no-captcha
@@ -48,15 +50,27 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 
 ## no-captcha element parameters
 
-| Param                | Type                   | Details                                                            |
-|----------------------|------------------------|--------------------------------------------------------------------|
-| g-recaptcha-response | Expression             | Bind reCAPTCHA response token                                      |
-| theme                | String {light \| dark} | Optional. The color theme of the widget. Can be set also in config |
-| site-key             | String                 | Optional. Your site key. Can be set also in config                 |
-| control              | Expression             | Optional. Object where reset-function will be injected             |
-| expired-callback     | Expression             | Optional. Callback for expired event                               |
+| Param                | Type                       | Details                                                            |
+|----------------------|----------------------------|--------------------------------------------------------------------|
+| g-recaptcha-response | Expression                 | Bind reCAPTCHA response token                                      |
+| theme                | String {light \| dark}     | Optional. The color theme of the widget. Can be set also in config |
+| size                 | String {normal \| compact} | Optional. The size of the widget. Can be set also in config        |
+| site-key             | String                     | Optional. Your site key. Can be set also in config                 |
+| control              | Expression                 | Optional. Object where reset-function will be injected             |
+| expired-callback     | Expression                 | Optional. Callback for expired event                               |
 
 ## Example
 
 1. Add your ```API key``` to ```example/index.html```
 1. Run Server ```$ node example/server.js```
+
+## Developing
+
+### Tests
+
+```$ npm test```
+
+### Release
+
+Release task builds the project and releases a new version to github 
+```$ grunt release[:patch | :minor | :major]```

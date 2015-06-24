@@ -24,10 +24,15 @@ angular
     }])
   .provider('noCAPTCHA', function noCaptchaProvider(){
     var siteKey,
+      size,
       theme;
 
     this.setSiteKey = function (_siteKey){
       siteKey = _siteKey;
+    };
+
+    this.setSize = function (_size){
+      size = _size;
     };
 
     this.setTheme = function (_theme){
@@ -37,14 +42,17 @@ angular
     this.$get = [function noCaptchaFactory(){
       return {
         theme: theme,
-        siteKey: siteKey
+        siteKey: siteKey,
+        size: size
       }
     }];
   })
   .directive('noCaptcha', [
     'noCAPTCHA',
     'googleGrecaptcha',
-    function (noCaptcha, googleGrecaptcha){
+    '$document',
+    '$window',
+    function (noCaptcha, googleGrecaptcha, $document, $window){
       /**
        * Removes all .pls-container elements
        *
@@ -72,6 +80,7 @@ angular
         scope: {
           gRecaptchaResponse: '=',
           siteKey: '@',
+          size: '@',
           theme: '@',
           control: '=?',
           expiredCallback: '=?'
@@ -86,6 +95,7 @@ angular
 
           grecaptchaCreateParameters = {
             sitekey: scope.siteKey || noCaptcha.siteKey,
+            size: scope.size || noCaptcha.size,
             theme: scope.theme || noCaptcha.theme,
             callback: function (r){
               scope.$apply(function (){
@@ -106,18 +116,20 @@ angular
           }
 
           googleGrecaptcha.then(function (){
-            widgetId = grecaptcha.render(
+            widgetId = $window.grecaptcha.render(
               element[0],
               grecaptchaCreateParameters
             );
             control.reset = function (){
-              grecaptcha.reset(widgetId);
+              $window.grecaptcha.reset(widgetId);
               scope.gRecaptchaResponse = null;
             };
           });
 
           scope.$on('$destroy', function (){
-            grecaptcha.reset(widgetId);
+            if($window.grecaptcha) {
+              $window.grecaptcha.reset(widgetId);
+            }
             removePLSContainers();
           });
         }
