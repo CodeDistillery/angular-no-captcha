@@ -37,7 +37,7 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
       }
     ]);
     ```
-    
+
 1. Finally add noCaptcha element to your form
     ```html
     <no-captcha
@@ -63,3 +63,14 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 
 1. Add your ```API key``` to ```example/index.html```
 1. Run Server ```$ node example/server.js```
+
+## Developing
+
+### Tests
+
+```$ npm test```
+
+### Release
+
+Release task builds the project and releases a new version to github 
+```$ grunt release[:patch | :minor | :major]```
