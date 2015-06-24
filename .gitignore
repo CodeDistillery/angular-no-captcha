@@ -8,3 +8,4 @@ app/tests/coverage/
 .bower-*/
 .idea/
 *.pem
+.local-env-vars
