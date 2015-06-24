@@ -24,10 +24,15 @@ angular
     }])
   .provider('noCAPTCHA', function noCaptchaProvider(){
     var siteKey,
+      size,
       theme;
 
     this.setSiteKey = function (_siteKey){
       siteKey = _siteKey;
+    };
+
+    this.setSize = function (_size){
+      size = _size;
     };
 
     this.setTheme = function (_theme){
@@ -37,7 +42,8 @@ angular
     this.$get = [function noCaptchaFactory(){
       return {
         theme: theme,
-        siteKey: siteKey
+        siteKey: siteKey,
+        size: size
       }
     }];
   })
@@ -74,6 +80,7 @@ angular
         scope: {
           gRecaptchaResponse: '=',
           siteKey: '@',
+          size: '@',
           theme: '@',
           control: '=?',
           expiredCallback: '=?'
@@ -88,6 +95,7 @@ angular
 
           grecaptchaCreateParameters = {
             sitekey: scope.siteKey || noCaptcha.siteKey,
+            size: scope.size || noCaptcha.size,
             theme: scope.theme || noCaptcha.theme,
             callback: function (r){
               scope.$apply(function (){

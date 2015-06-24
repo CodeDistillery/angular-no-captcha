@@ -25,6 +25,18 @@ describe('noCAPTCHA provider', function() {
     }]));
   });
 
+  describe('set site size', function() {
+    var testSize = 'compact';
+
+    beforeEach(function() {
+      noCAPTCHAProvider.setSize(testSize);
+    });
+
+    it('should remember the value', inject(['noCAPTCHA', function(noCAPTCHA) {
+      expect(noCAPTCHA.size).to.equal(testSize);
+    }]));
+  });
+
   describe('set theme', function() {
     var theme = 'dark';
 
