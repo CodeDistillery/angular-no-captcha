@@ -72,5 +72,6 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 
 ### Release
 
-Release task builds the project and releases a new version to github 
+Release task builds the project and releases a new version to GitHub
+
 ```$ grunt release[:patch | :minor | :major]```
