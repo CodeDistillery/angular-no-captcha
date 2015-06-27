@@ -50,15 +50,15 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
 
 ## no-captcha element parameters
 
-| Param                | Type                       | Details                                                                                                                                           |
-|----------------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| g-recaptcha-response | Expression                 | Bind reCAPTCHA response token                                                                                                                     |
-| theme                | String {light \| dark}     | Optional. The color theme of the widget. Can be set also in config                                                                                |
-| size                 | String {normal \| compact} | Optional. The size of the widget. Can be set also in config                                                                                       |
-| site-key             | String                     | Optional. Your site key. Can be set also in config                                                                                                |
-| language             | String                     | Optional. Forces the widget to render in a specific [language](https://developers.google.com/recaptcha/docs/language). Can only be set in config. |
-| control              | Expression                 | Optional. Object where reset-function will be injected                                                                                            |
-| expired-callback     | Expression                 | Optional. Callback for expired event                                                                                                              |
+| Param                | Type                       | Details                                                                                                                                               |
+|----------------------|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| g-recaptcha-response | Expression                 | Bind reCAPTCHA response token                                                                                                                         |
+| theme                | String {light \| dark}     | Optional. The color theme of the widget. Can be set also in config                                                                                    |
+| size                 | String {normal \| compact} | Optional. The size of the widget. Can be set also in config                                                                                           |
+| site-key             | String                     | Optional. Your site key. Can be set also in config                                                                                                    |
+| language             | String                     | Optional. Forces the widget to render in a specific [language](https://developers.google.com/recaptcha/docs/language). Can **only** be set in config. |
+| control              | Expression                 | Optional. Object where reset-function will be injected                                                                                                |
+| expired-callback     | Expression                 | Optional. Callback for expired event                                                                                                                  |
 
 ## Example
 
