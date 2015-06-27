@@ -48,7 +48,7 @@ Angular.JS wrapper for Google's No CAPTCHA reCAPTCHA. See demo at [http://codedi
     </no-captcha>
     ```
 
-## no-captcha element parameters
+## no-captcha parameters
 
 | Param                | Type                       | Details                                                                                                                                               |
 |----------------------|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
