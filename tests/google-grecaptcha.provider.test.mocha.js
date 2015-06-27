@@ -1,4 +1,4 @@
-describe('googleGrecaptcha service', function (){
+describe('googleGrecaptcha provider', function (){
   beforeEach(module('noCAPTCHA'));
 
   var googleGrecaptcha;
