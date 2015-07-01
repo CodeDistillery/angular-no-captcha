@@ -2,51 +2,71 @@
 
 angular
   .module('noCAPTCHA', [])
-  .service('googleGrecaptcha', [
-    '$q',
-    '$window',
-    '$document',
-    '$rootScope',
-    function googleGrecaptchaService($q, $window, $document, $rootScope){
-      var deferred = $q.defer();
+  .provider('googleGrecaptcha', function googleGrecaptchaProvider(){
+    var language;
 
-      $window.recaptchaOnloadCallback = function (){
-        $rootScope.$apply(function (){
-          deferred.resolve();
-        });
-      };
-
-      var s = $document[0].createElement('script');
-      s.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
-      $document[0].body.appendChild(s);
-
-      return deferred.promise;
-    }])
-  .provider('noCAPTCHA', function noCaptchaProvider(){
-    var siteKey,
-      size,
-      theme;
-
-    this.setSiteKey = function (_siteKey){
-      siteKey = _siteKey;
+    this.setLanguage = function (_language){
+      language = _language;
     };
 
-    this.setSize = function (_size){
-      size = _size;
-    };
+    this.$get = [
+      '$q',
+      '$window',
+      '$document',
+      '$rootScope',
+      function googleGrecaptchaFactory($q, $window, $document, $rootScope){
+        var deferred = $q.defer();
 
-    this.setTheme = function (_theme){
-      theme = _theme;
-    };
+        $window.recaptchaOnloadCallback = function (){
+          $rootScope.$apply(function (){
+            deferred.resolve();
+          });
+        };
 
-    this.$get = [function noCaptchaFactory(){
-      return {
-        theme: theme,
-        siteKey: siteKey,
-        size: size
-      }
+        var s = $document[0].createElement('script');
+        var src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
+        s.type = 'application/javascript';
+
+        if (language) {
+          src += '&hl=' + language;
+        }
+        s.src = src;
+        $document[0].body.appendChild(s);
+
+        return deferred.promise;
     }];
   })
+  .provider('noCAPTCHA', [
+    'googleGrecaptchaProvider',
+    function noCaptchaProvider(googleGrecaptchaProvider){
+      var siteKey,
+        size,
+        theme;
+
+      this.setSiteKey = function (_siteKey){
+        siteKey = _siteKey;
+      };
+
+      this.setSize = function (_size){
+        size = _size;
+      };
+
+      this.setTheme = function (_theme){
+        theme = _theme;
+      };
+
+      this.setLanguage = function (language){
+        googleGrecaptchaProvider.setLanguage(language);
+      };
+
+      this.$get = function noCaptchaFactory(){
+        return {
+          theme: theme,
+          siteKey: siteKey,
+          size: size
+        };
+      };
+  }])
   .directive('noCaptcha', [
     'noCAPTCHA',
     'googleGrecaptcha',
@@ -95,7 +115,7 @@ angular
 
           grecaptchaCreateParameters = {
             sitekey: scope.siteKey || noCaptcha.siteKey,
-            size: scope.size || noCaptcha.size,
+            size: scope.size || noCaptcha.size,
             theme: scope.theme || noCaptcha.theme,
             callback: function (r){
               scope.$apply(function (){
