@@ -1,12 +1,13 @@
 describe('noCAPTCHA provider', function() {
-  var noCAPTCHAProvider;
+  var noCAPTCHAProvider, googleGrecaptchaProvider;
 
   beforeEach(function() {
     angular
       .module('dummyModule', function() {})
-      .config(['noCAPTCHAProvider', function(provider) {
-        noCAPTCHAProvider = provider;
-      }]);
+      .config(function(_noCAPTCHAProvider_, _googleGrecaptchaProvider_) {
+        noCAPTCHAProvider = _noCAPTCHAProvider_;
+        googleGrecaptchaProvider = _googleGrecaptchaProvider_;
+      });
 
     module('noCAPTCHA', 'dummyModule');
 
@@ -47,5 +48,18 @@ describe('noCAPTCHA provider', function() {
     it('should remember the value', inject(['noCAPTCHA', function(noCAPTCHA) {
       expect(noCAPTCHA.theme).to.equal(theme);
     }]));
+  });
+
+  describe('set language', function() {
+    var language = 'en';
+
+    beforeEach(function() {
+      sinon.spy(googleGrecaptchaProvider, 'setLanguage');
+      noCAPTCHAProvider.setLanguage(language);
+    });
+
+    it('should set googleGrecaptchaProvider language', function () {
+      expect(googleGrecaptchaProvider.setLanguage).to.have.been.calledWith(language);
+    });
   });
 });
