@@ -113,7 +113,7 @@ angular
 
           grecaptchaCreateParameters = {
             sitekey: scope.siteKey || noCaptcha.siteKey,
-            size: scope.size || noCaptcha.size,
+            size: scope.size || noCaptcha.size,
             theme: scope.theme || noCaptcha.theme,
             callback: function (r){
               scope.$apply(function (){
