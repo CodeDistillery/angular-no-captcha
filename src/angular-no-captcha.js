@@ -25,6 +25,8 @@ angular
 
         var s = $document[0].createElement('script');
         var src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
+        s.type = 'application/javascript';
+
         if (language) {
           src += '&hl=' + language;
         }
