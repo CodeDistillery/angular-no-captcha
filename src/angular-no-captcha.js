@@ -100,6 +100,7 @@ angular
         scope: {
           gRecaptchaResponse: '=',
           siteKey: '@',
+          stoken: '@',
           size: '@',
           theme: '@',
           control: '=?',
@@ -130,6 +131,10 @@ angular
               }
             }
           };
+
+          if (scope.stoken) {
+            grecaptchaCreateParameters.stoken = scope.stoken;
+          }
 
           if(!grecaptchaCreateParameters.sitekey) {
             throw new Error('Site Key is required');
