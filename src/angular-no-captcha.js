@@ -15,25 +15,28 @@ angular
       '$document',
       '$rootScope',
       function googleGrecaptchaFactory($q, $window, $document, $rootScope){
-        var deferred = $q.defer();
 
-        $window.recaptchaOnloadCallback = function (){
-          $rootScope.$apply(function (){
-            deferred.resolve();
-          });
-        };
+        return function (language) {
+          var deferred = $q.defer();
 
-        var s = $document[0].createElement('script');
-        var src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
-        s.type = 'application/javascript';
+          $window.recaptchaOnloadCallback = function () {
+            $rootScope.$apply(function () {
+              deferred.resolve();
+            });
+          };
 
-        if (language) {
-          src += '&hl=' + language;
+          var s = $document[0].createElement('script');
+          var src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnloadCallback&render=explicit';
+          s.type = 'application/javascript';
+
+          if (language) {
+            src += '&hl=' + language;
+          }
+          s.src = src;
+          $document[0].body.appendChild(s);
+
+          return deferred.promise;
         }
-        s.src = src;
-        $document[0].body.appendChild(s);
-
-        return deferred.promise;
     }];
   })
   .provider('noCAPTCHA', [
@@ -103,6 +106,7 @@ angular
           stoken: '@',
           size: '@',
           theme: '@',
+          language: '@',
           control: '=?',
           expiredCallback: '=?'
         },
@@ -140,16 +144,23 @@ angular
             throw new Error('Site Key is required');
           }
 
-          googleGrecaptcha.then(function (){
-            widgetId = $window.grecaptcha.render(
-              element[0],
-              grecaptchaCreateParameters
-            );
-            control.reset = function (){
-              $window.grecaptcha.reset(widgetId);
-              scope.gRecaptchaResponse = null;
-            };
-          });
+          typeof scope.language !== 'undefined' && scope.$watch('language', function (language) {
+            updateLanguage(language);
+          }) || updateLanguage();
+
+          function updateLanguage(language) {
+            element.empty();
+            googleGrecaptcha(language).then(function () {
+              widgetId = $window.grecaptcha.render(
+                  element[0],
+                  grecaptchaCreateParameters
+              );
+              control.reset = function () {
+                $window.grecaptcha.reset(widgetId);
+                scope.gRecaptchaResponse = null;
+              };
+            });
+          }
 
           scope.$on('$destroy', function (){
             if($window.grecaptcha) {
