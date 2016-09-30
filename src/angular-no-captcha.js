@@ -13,12 +13,12 @@ angular
       '$q',
       '$window',
       '$document',
-      '$rootScope',
-      function googleGrecaptchaFactory($q, $window, $document, $rootScope){
+      '$timeout',
+      function googleGrecaptchaFactory($q, $window, $document, $timeout){
         var deferred = $q.defer();
 
         $window.recaptchaOnloadCallback = function (){
-          $rootScope.$apply(function (){
+          $timeout(function (){
             deferred.resolve();
           });
         };
